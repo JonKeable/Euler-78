@@ -13,7 +13,21 @@ public class Main {
 		long x = 1000000;
 		long time = 0;
 		
-		for(int i = 1; i <= 1000; i++) {
+		System.out.println("How many times would you like to run the code to calculate first p(n) divisible by 1 million? (default 1)");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String inNum = null;
+		int its = 1;
+		
+		try {
+			inNum = br.readLine();
+			its = Integer.parseInt(inNum);
+			System.out.println("Doing: " + its + " iterations");
+		}
+		catch(Exception e) {
+			System.err.println("Something was wrong with your number! Doing 1 iteration");
+		}
+		
+		for(int i = 1; i <= its; i++) {
 			
 			long start = System.nanoTime();
 			calcFirstDiv(x);
@@ -22,8 +36,8 @@ public class Main {
 			time += (end - start)/1000000; // gives time in milliseconds
 		}
 		
-		System.out.println("time taken for 1000: " + time + "ms");
-		time = time/1000;
+		System.out.println("time taken for " + its + ": " + + time + "ms");
+		time = time/its;
 		System.out.println("time taken for 1: " + time + "ms");
 		/*
 		long test1 = 100;

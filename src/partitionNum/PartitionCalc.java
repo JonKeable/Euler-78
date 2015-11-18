@@ -8,6 +8,7 @@ public class PartitionCalc {
 	BigInteger bigSavedPofn; 
 	//HashMap<String, BigInteger> savedParts = new HashMap<String, BigInteger>();
 	HashMap<Long, BigInteger> mapOfParts = new HashMap<Long, BigInteger>();
+	HashMap<Long, Long> pentsMap = new HashMap<Long, Long>();
 	//HashMap<Long, Long> longMap = new HashMap<Long, Long>();
 	long savedPofn;
 	
@@ -33,7 +34,9 @@ public class PartitionCalc {
 			while(true) {
 					
 				int sign = (k % 2 == 0) ? -1 : 1 ;
-				pent = n - (k * (3 * k - 1) / 2);
+				//pent = n - (k * (3 * k - 1) / 2);
+				pent = n - getPent(k);
+				
 				if(pent < 0) {
 					break;
 				}
@@ -45,7 +48,9 @@ public class PartitionCalc {
 				}
 				
 					
-				pent = n - (k * (3 * k + 1) / 2);
+				//pent = n - (k * (3 * k + 1) / 2);
+				pent = n - getPent(-k);
+				
 				if(pent < 0) {
 					break;
 				}
@@ -64,9 +69,21 @@ public class PartitionCalc {
 		}
 		
 	}
+	
+	private long getPent(long k) {
+		Long ans = pentsMap.get(k);
+		if(ans != null) {
+			return ans;
+		}
+		else {
+			ans = (k * (3 * k - 1) / 2);
+			pentsMap.put(k, ans);
+			return ans;
+		}
+	}
 
-/*	
-protected long longPentP(long n) {
+	/*	
+	protected long longPentP(long n) {
 		
 		if(n == 0) return 1;
 		if(n < 0) return 0;
@@ -115,7 +132,7 @@ protected long longPentP(long n) {
 		}
 		
 	}
-*/
+	*/
 	
 	private BigInteger longToBig(Long l) {
 		return new BigInteger(l.toString());
